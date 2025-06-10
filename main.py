@@ -24,6 +24,10 @@ app.add_middleware(
 
 service_materia = MateriaService()
 
+@app.get("/")
+def read_root():
+    return {"message": "Bienvenido a mi API con FastAPI"}
+
 @app.get("/materias/obtener")
 async def get_materias():
     
@@ -71,9 +75,7 @@ async def upload_files(
             f.write(contents)
     return {"message": "Archivos recibidos"}
 
-if __name__ == "__main__":
-    
-    uvicorn.run(app, host="localhost", port=8000)
+
 
 
 # @app.post("/contenido/upload")

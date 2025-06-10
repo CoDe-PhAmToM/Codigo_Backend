@@ -53,9 +53,6 @@ class Database:
             print("✅ Pool de conexiones cerrado.")
 
 
-db = Database()
-db.obtener_pool()
-
 
 
 
