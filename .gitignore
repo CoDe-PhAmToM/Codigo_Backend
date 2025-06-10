@@ -1,0 +1,4 @@
+venv
+.env
+IngeniaRed.sql
+__pycache__
