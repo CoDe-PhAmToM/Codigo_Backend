@@ -1,18 +1,16 @@
-import shutil
 import fastapi, fastapi.middleware.cors
 from fastapi.params import File
-import uvicorn
 from fastapi import UploadFile, File, Form
 import os
 from typing import List
-from src.services.materia_service import MateriaService
+from src.services.ingered_service import IngeniaRedService
 
 
 app = fastapi.FastAPI()
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://codigo-frontend-black.vercel.app",
+    #"https://codigo-frontend-black.vercel.app",
     "https://upea-sistemas.vercel.app"
 ]
 
@@ -22,9 +20,10 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]  # Añade esta línea
 )
 
-service_materia = MateriaService()
+servicios_ingred = IngeniaRedService()
 
 @app.get("/")
 def read_root():
@@ -33,35 +32,35 @@ def read_root():
 @app.get("/materias/obtener")
 async def get_materias():
     
-    materias = service_materia.obtener_materias()
+    materias = servicios_ingred.obtener_materias()
 
     return materias
 
 @app.get("/semestres/obtener")
 async def get_semestres():
     
-    semestres = service_materia.obtener_semestres()
+    semestres = servicios_ingred.obtener_semestres()
 
     return semestres
 
 @app.get("/eventos/obtener")
 async def get_eventos():
     
-    eventos = service_materia.obtener_eventos()
+    eventos = servicios_ingred.obtener_eventos()
 
     return eventos
 
 @app.get("/anuncios/obtener")
 async def get_anuncios():
     
-    anuncios = service_materia.obtener_anuncios()
+    anuncios = servicios_ingred.obtener_anuncios()
 
     return anuncios
 
 @app.get("/preguntas_frecuentes/obtener")
 async def get_preguntas_frecuentes():
     
-    faqs = service_materia.obtener_preguntas_frecuentes()
+    faqs = servicios_ingred.obtener_preguntas_frecuentes()
 
     return faqs
 
