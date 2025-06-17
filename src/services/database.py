@@ -1,4 +1,3 @@
-
 from psycopg2 import pool
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
@@ -30,7 +29,8 @@ class Database:
                     user=cls._USERNAME,
                     password=cls._PASSWORD,
                     database=cls._DATABASE,
-                    cursor_factory=RealDictCursor)
+                    cursor_factory=RealDictCursor,
+                )
                 print("✅ Pool de conexiones creado.")
             except Exception as e:
                 print(f"❌ Error al crear el pool de conexiones: {e}")
