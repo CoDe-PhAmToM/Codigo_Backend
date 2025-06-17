@@ -9,20 +9,23 @@ from fastapi import Query, HTTPException
 
 app = fastapi.FastAPI()
 
-# Configuración CORS
+# Configuración CORS mejorada
 origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://upea-sistemas.vercel.app"
+    "http://localhost:*",
+    "http://127.0.0.1:*",
+    "https://localhost:*",
+    "https://127.0.0.1:*",
+    "https://upea-sistemas.vercel.app",
+    "https://*.vercel.app"
 ]
 
 app.add_middleware(
     fastapi.middleware.cors.CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
-    expose_headers=["*"]
+    expose_headers=["Content-Disposition"]  # Importante para descargas
 )
 
 servicios_ingred = IngeniaRedService()
